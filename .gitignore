@@ -1,5 +1,7 @@
 *.class
 
+!gradle/gradle-wrapper.jar
+
 # Package Files #
 *.jar
 *.war
@@ -46,3 +48,4 @@ lib/
 
 # Gradle output dir
 build/
+!gradle/gradle-wrapper.jar
