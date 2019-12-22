@@ -32,7 +32,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro8.JMetro;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+
 //import org.scenicview.ScenicView;
 
 import java.net.URL;
@@ -48,7 +50,7 @@ public class CompleteRibbonSample extends Application {
         Scene scene = new Scene(root);
 
 //        ScenicView.show(scene);
-        new JMetro(JMetro.Style.LIGHT).applyTheme(scene);
+        new JMetro(scene, Style.LIGHT);
 
         primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
