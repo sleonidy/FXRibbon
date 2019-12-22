@@ -89,24 +89,16 @@ public class RibbonTab extends Tab {
         return contextualColor;
     }
 
-    private void groupsChanged(ListChangeListener.Change<? extends RibbonGroup> changed) {
+ private void groupsChanged(ListChangeListener.Change<? extends RibbonGroup> changed) {
         while(changed.next())
         {
-            if (changed.wasAdded())
-            {
-                updateAddedGroups(changed.getAddedSubList());
-            }
             if(changed.wasRemoved())
             {
-                for (RibbonGroup group : changed.getRemoved())
-                {
-                    int groupIndex = content.getChildren().indexOf(group);
-                    if (groupIndex != 0)
-                        content.getChildren().remove(groupIndex - 1); // Remove separator
-                    content.getChildren().remove(group);
-
-                }
-
+                content.getChildren().removeAll(changed.getRemoved());
+            }
+            if (changed.wasAdded())
+            {
+                content.getChildren().addAll(changed.getFrom(), changed.getAddedSubList());
             }
         }
     }
