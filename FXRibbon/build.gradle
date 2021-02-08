@@ -1,12 +1,14 @@
 plugins {
-    id "com.jfrog.bintray" version "1.8.4"
     id "java-library"
     id "maven-publish"
+    id "org.openjfx.javafxplugin" version "0.0.9"
 }
-
+repositories{
+    mavenCentral()
+}
 sourceCompatibility = '1.8'
 
-version = '1.2.2'
+version = '1.2.3'
 def versionDescription = 'FXRibbon'
 
 
@@ -30,35 +32,20 @@ java {
     withSourcesJar()
 }
 /* Publishing */
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    pkg {
-        repo = 'maven'
-        name = project.name
-        //userOrg = 'dukke'
-        licenses = ['BSD New']
-        vcsUrl = 'https://github.com/dukke/FXRibbon.git'
-        publications = ['mavenJava']
-        websiteUrl = 'https://www.pixelduke.com/fxribbon'
-        issueTrackerUrl = 'https://github.com/dukke/FXRibbon/issues'
-        publicDownloadNumbers = true
-        version {
-            name = project.version
-            desc = versionDescription // Version description
-            vcsTag = project.version
-        }
-    }
-}
 
+ javafx {
+    version = "15"
+    modules("javafx.base", "javafx.controls")
+
+ }
 publishing {
     repositories {
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/${project.user}/${project.repo}")
             credentials {
-                username = project.user ?: System.getenv("USERNAME") ?: ""
-                password = project.key ?: System.getenv("PASSWORD") ?: ""
+                username = project.hasProperty("user") ? project.user : System.getenv("USERNAME") ?: ""
+                password = project.hasProperty("key") ? project.key : System.getenv("PASSWORD") ?: ""
             }
         }
     }
