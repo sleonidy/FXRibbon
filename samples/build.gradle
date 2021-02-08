@@ -6,8 +6,8 @@ plugins {
 mainClassName = 'com.pixelduke.control.CompleteRibbonSample'
 
 dependencies {
-    implementation project(':')
-//    compile name: 'ScenicView'
+    implementation rootProject
+
     implementation('org.jfxtras:jmetro:11.6.12') {
         exclude group: 'org.openjfx'
     }
